@@ -40,7 +40,7 @@
     },
     methods: {
       login() {
-        axios.post('http://localhost:5000/login', {username: this.username, password: this.password})
+        axios.post('http://munchapi.herokuapp.com/login', {username: this.username, password: this.password})
           .then(response => this.loginSuccessful(response))
           .catch(() => this.loginFailed())
       },
@@ -62,7 +62,7 @@
         delete localStorage.token
       },
       signup() {
-
+        this.$router.replace(this.$route.query.redirect || 'signup/')
       }
     }
 
