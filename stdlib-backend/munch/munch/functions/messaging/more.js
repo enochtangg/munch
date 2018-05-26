@@ -10,6 +10,7 @@ const send = require('../../helpers/send.js')
 * @param {string} createdDatetime Datetime when the SMS was sent
 * @returns {any}
 */
+
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
   return send(
     receiver,

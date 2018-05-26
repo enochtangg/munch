@@ -1,6 +1,5 @@
 const lib = require('lib')({ token: process.env.STDLIB_TOKEN })
 const send = require('../../helpers/send.js')
-var firebase = require("firebase");
 
 /**
 * MORE handler, responds if user texts "more"
@@ -12,22 +11,26 @@ var firebase = require("firebase");
 * @returns {any}
 */
 
-// Initialize Firebase
-var config = {
-  apiKey: "AIzaSyCSeIK_ynpeKDSzXZ824N23Rr4ppnSwzqQ",
-  authDomain: "munch-eac1f.firebaseapp.com",
-  databaseURL: "https://munch-eac1f.firebaseio.com/",
-  storageBucket: "https://munch-eac1f.appspot.com",
-};
 firebase.initializeApp(config);
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
   message_array = message.split(", ")
-  let message_restaurant = message_array[1]
-  let message_item = message_array[2]
+  let restaurant = message_array[1]
+  let item = message_array[2]
+
+  var data = {
+    restaurant: restaurant,
+    item: item
+  }
+
+  var request = require('request');
+  request.post('some heroku link', {form:{'restaurant':restaurant, 'item':item}}, { json: true }, (err, res, body) => {
+    if (err) { return console.log(err); }
+    console.log(body);
+  });
 
   return send(
     receiver,
     sender,
-    `Restaurant: ${message_restaurant} Item: ${message_item}`
+    `Restaurant: ${restaurant}, Item: ${item}`
   )
 }
