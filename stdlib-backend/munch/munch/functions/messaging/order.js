@@ -17,13 +17,6 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   let item = message_array[2]
 
   var request = require('request');
-<<<<<<< HEAD
-  request.post('https://localhost:5000/login', {form:{'username':'test', 'password':'password'}}, { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
-    console.log(body);
-=======
-  var status_code
-
   request.post('https://munchapi.herokuapp.com/item/order',
     {form:{'restaurant_name':restaurant, 'item_name':item}},
     { json: true }, (err, res, body) => {
@@ -34,7 +27,6 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
         `Congratulations. Your order of ${item} from ${restaurant} was successfuly placed.`
       )
     }
->>>>>>> 6cf1e5a80a0f017573aa6ffd6e5007e11241dac6
   });
 
   return send(
