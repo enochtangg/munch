@@ -10,8 +10,10 @@ const lib = require('lib')({ token: process.env.STDLIB_TOKEN })
 */
 
 module.exports = async (sender = '', receiver = '', message = '_', createdDatetime = '', context) => {
-  let handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_'
-  let new_message = handler.split(" ")[0]
+  let handler = message.toLowerCase().trim().split(", ")[0]
+  if (handler === message) {
+    handler = message.toLowerCase().trim().replace(/[^a-z0-9_-]/gi, '_') || '_'
+  }
   let result
   try {
     result = await lib[`${context.service.identifier}.messaging.${handler}`]({

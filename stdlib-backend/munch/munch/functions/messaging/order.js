@@ -11,11 +11,12 @@ const send = require('../../helpers/send.js')
 * @returns {any}
 */
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
+  message_array = message.split(", ")
+  let restaurant = message_array[1]
+  let item = message_array[2]
   return send(
     receiver,
     sender,
-    `This is the ORDER handler for your MessageBird SMS handler on StdLib` +
-      `\n\n` +
-      `You can customize its behavior in /functions/messaging/more.js`
+    `Restaurant: ${restaurant}, Item: ${item}`
   )
 }
