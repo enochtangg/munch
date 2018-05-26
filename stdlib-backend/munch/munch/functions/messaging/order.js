@@ -22,11 +22,12 @@ var config = {
 firebase.initializeApp(config);
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
   message_array = message.split(", ")
-  let restaurant = message_array[1]
-  let item = message_array[2]
+  let message_restaurant = message_array[1]
+  let message_item = message_array[2]
+
   return send(
     receiver,
     sender,
-    `Restaurant: ${restaurant}, Item: ${item}`
+    `Restaurant: ${message_restaurant} Item: ${message_item}`
   )
 }
