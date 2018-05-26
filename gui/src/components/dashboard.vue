@@ -46,7 +46,7 @@
     },
     methods: {
       getRestaurants() {
-        axios.get('http://localhost:5000/restaurants', {
+        axios.get('http://munchapi.herokuapp.com/restaurants', {
           headers: {
             'Authorization': 'Bearer ' + localStorage.token
           },

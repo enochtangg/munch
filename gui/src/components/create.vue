@@ -44,7 +44,7 @@
         let data = {
           restaurant_name: this.restaurant_name
         };
-        axios.post('http://localhost:5000/restaurant/new', data, headers)
+        axios.post('http://munchapi.herokuapp.com', data, headers)
           .then(response => this.submitSuccessful(response))
           .catch(() => this.submitFailed());
         this.$router.push({
