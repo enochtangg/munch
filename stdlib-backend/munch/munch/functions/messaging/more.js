@@ -1,15 +1,6 @@
 const lib = require('lib')({ token: process.env.STDLIB_TOKEN })
 const send = require('../../helpers/send.js')
 
-var admin = require('firebase-admin');
-
-var serviceAccount = require('./firebase/munch-eac1f-firebase-adminsdk-m67bj-66f4e3c1b5.json');
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://munch-eac1f.firebaseio.com'
-});
-
 /**
 * MORE handler, responds if user texts "more"
 *  (or any uppercase variation like "MORE")
@@ -20,21 +11,6 @@ admin.initializeApp({
 * @returns {any}
 */
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
-  var db = firebase.database();
-  var ref = db.ref('restaurants')
-
-  var usersRef = ref.child("users");
-  usersRef.set({
-    alanisawesome: {
-      date_of_birth: "June 23, 1912",
-      full_name: "Alan Turing"
-    },
-    gracehop: {
-      date_of_birth: "December 9, 1906",
-      full_name: "Grace Hopper"
-    }
-  });
-  
   return send(
     receiver,
     sender,
