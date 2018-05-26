@@ -11,26 +11,29 @@ const send = require('../../helpers/send.js')
 * @returns {any}
 */
 
-firebase.initializeApp(config);
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
   message_array = message.split(", ")
   let restaurant = message_array[1]
   let item = message_array[2]
 
-  var data = {
-    restaurant: restaurant,
-    item: item
-  }
-
   var request = require('request');
-  request.post('some heroku link', {form:{'restaurant':restaurant, 'item':item}}, { json: true }, (err, res, body) => {
-    if (err) { return console.log(err); }
-    console.log(body);
+  var status_code
+
+  request.post('https://munchapi.herokuapp.com/item/order',
+    {form:{'restaurant_name':restaurant, 'item_name':item}},
+    { json: true }, (err, res, body) => {
+    if (res.status_code >= 200 && res.status_code <= 300) {
+      return send(
+        receiver,
+        sender,
+        `Congratulations. Your order of ${item} from ${restaurant} was successfuly placed.`
+      )
+    }
   });
 
   return send(
     receiver,
     sender,
-    `Restaurant: ${restaurant}, Item: ${item}`
+    `Sorry, either the restaurant or item does not exist.`
   )
 }
