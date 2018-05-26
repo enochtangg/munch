@@ -42,7 +42,7 @@
           .catch(() => this.registerFailed())
       },
       registerSuccessful(res) {
-        this.$router.replace(this.$route.query.redirect || 'login/')
+        this.$router.replace(this.$route.query.redirect || '/')
       },
       registerFailed() {
         alert('Failed to sign up')

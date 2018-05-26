@@ -20,7 +20,7 @@
         <md-card class="menu-card">
             <md-card-header>
                 <md-card-header-text>
-                    <div class="md-title">{{ this.current_restaurant.restaurant_name }}'s Menu Items</div>
+                    <div class="md-title">{{ this.restaurant.restaurant_name }}'s Menu Items</div>
                 </md-card-header-text>
             </md-card-header>
 
@@ -58,10 +58,16 @@
     },
     methods: {
       submit() {
+        let headers = {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.token,
+            'Content-Type': 'application/json',
+          }
+        };
         axios.post('http://munchapi.herokuapp.com/item/new', {
           item_name: this.food_item,
           restaurant_name: this.restaurant.restaurant_name
-        })
+        }, headers)
           .then(response => this.loginSuccessful(response))
           .catch(() => this.loginFailed());
         this.food_item = '';
@@ -75,16 +81,28 @@
       },
       watchForItems() {
         setInterval(function () {
-          axios.get('http://munchapi.herokuapp.com/restaurants')
+          let headers = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.token,
+              'Content-Type': 'application/json',
+            }
+          };
+          axios.get('http://munchapi.herokuapp.com/restaurants', headers)
             .then(response => this.loadRestaurant(response))
             .catch(() => this.failed())
         }.bind(this), 1000);
       },
       watchForOrders() {
         setInterval(function () {
+          let headers = {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.token,
+              'Content-Type': 'application/json',
+            }
+          };
           axios.post('http://munchapi.herokuapp.com/item/order', {
             restaurant_name: this.restaurant.restaurant_name
-          })
+          }, headers)
             .then(response => this.loadOrder(response))
             .catch(() => this.failed())
         }.bind(this), 2000);

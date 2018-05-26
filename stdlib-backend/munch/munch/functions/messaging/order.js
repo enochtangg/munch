@@ -23,7 +23,7 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   }
 
   var request = require('request');
-  request.post('some heroku link', {form:{'restaurant':restaurant, 'item':item}}, { json: true }, (err, res, body) => {
+  request.post('https://localhost:5000/login', {form:{'username':'test', 'password':'password'}}, { json: true }, (err, res, body) => {
     if (err) { return console.log(err); }
     console.log(body);
   });
