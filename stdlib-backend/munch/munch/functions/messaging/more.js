@@ -3,7 +3,7 @@ const send = require('../../helpers/send.js')
 
 var admin = require('firebase-admin');
 
-var serviceAccount = require('./firebase/munch-eac1f-firebase-adminsdk-m67bj-66f4e3c1b5.json');
+var serviceAccount = require('../../firebase/munch-eac1f-firebase-adminsdk-m67bj-66f4e3c1b5.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -23,18 +23,7 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   var db = firebase.database();
   var ref = db.ref('restaurants')
 
-  var usersRef = ref.child("users");
-  usersRef.set({
-    alanisawesome: {
-      date_of_birth: "June 23, 1912",
-      full_name: "Alan Turing"
-    },
-    gracehop: {
-      date_of_birth: "December 9, 1906",
-      full_name: "Grace Hopper"
-    }
-  });
-  
+
   return send(
     receiver,
     sender,
