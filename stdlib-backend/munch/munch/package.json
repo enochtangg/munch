@@ -5,6 +5,7 @@
   "author": "munch <e26tang@edu.uwaterloo.ca>",
   "main": "functions/__main__.js",
   "dependencies": {
+    "firebase": "^5.0.4",
     "firebase-admin": "^5.12.1",
     "lib": "^3.0.1"
   },

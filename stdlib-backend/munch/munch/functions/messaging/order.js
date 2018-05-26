@@ -1,5 +1,6 @@
 const lib = require('lib')({ token: process.env.STDLIB_TOKEN })
 const send = require('../../helpers/send.js')
+var firebase = require("firebase");
 
 /**
 * MORE handler, responds if user texts "more"
@@ -10,6 +11,15 @@ const send = require('../../helpers/send.js')
 * @param {string} createdDatetime Datetime when the SMS was sent
 * @returns {any}
 */
+
+// Initialize Firebase
+var config = {
+  apiKey: "AIzaSyCSeIK_ynpeKDSzXZ824N23Rr4ppnSwzqQ",
+  authDomain: "munch-eac1f.firebaseapp.com",
+  databaseURL: "https://munch-eac1f.firebaseio.com/",
+  storageBucket: "https://munch-eac1f.appspot.com",
+};
+firebase.initializeApp(config);
 module.exports = async (sender = '', receiver = '', message = '', createdDatetime = '', context) => {
   message_array = message.split(", ")
   let restaurant = message_array[1]
