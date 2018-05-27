@@ -17,9 +17,11 @@ module.exports = async (sender = '', receiver = '', message = '', createdDatetim
   let item = message_array[2]
 
   var request = require('request');
+
   request.post('https://munchapi.herokuapp.com/item/order',
     {form:{'restaurant_name':restaurant, 'item_name':item}},
     { json: true }, (err, res, body) => {
+      console.log(res.status_code)
     if (res.status_code >= 200 && res.status_code <= 300) {
       return send(
         receiver,

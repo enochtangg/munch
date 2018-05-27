@@ -100,7 +100,7 @@
               'Content-Type': 'application/json',
             }
           };
-          axios.post('http://munchapi.herokuapp.com/item/order', {
+          axios.post('http://munchapi.herokuapp.com/item/'+this.restaurant.restaurant_id, {
             restaurant_name: this.restaurant.restaurant_name
           }, headers)
             .then(response => this.loadOrder(response))
